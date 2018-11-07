@@ -21,3 +21,21 @@
       #+END_SRC
 
       Replace /dev/ttyUSB0 with your UART or remove it and --upload-port argument and hope platformio guesses correctly.
+** OSC
+   Routes used are "led/1" through "led/4".
+   for now OSC server assumes it has 2 i2c LED controllers connected on hardcoded addresses, it's fine for me for now.
+** Things to do
+*** TODO Recover from WiFi disconnects
+*** TODO Optional logging over serial
+    I don't want it to spend time printing to serial when I don't need it.
+*** TODO Ability to discover IP address of ESP8266 OSC server
+    Possible options:
+    - Use an LCD screen to display it.
+    - mDNS?
+    - Broadcast something on the network?
+*** TODO Minimize latency
+*** TODO Ability to set i2c address on Pro Mini in runtime
+    Right now it's hardcoded and I need to reupload firmware to change i2c address, which is inconvenient. It could check state of some pin to determine address it should use
+*** TODO Status LEDs for debugging?
+    - Is it connected to WiFi?
+    - Error rate?
