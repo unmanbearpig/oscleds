@@ -1,5 +1,5 @@
 #include "Arduino.h"
-
+#include "pwm_16.h"
 #include <Wire.h>
 #include <WireData.h>
 
@@ -29,35 +29,18 @@ Brightness newBrightness = {
 
 void receiveEvent(int byteCount);
 
-uint16_t icr = 0xffff;
-
-void setupPWM16() {
-  DDRB  |= _BV(PB1) | _BV(PB2);       /* set pins as outputs */
-  TCCR1A = _BV(COM1A1) | _BV(COM1B1)  /* non-inverting PWM */
-    | _BV(WGM11);                 /* mode 14: fast PWM, TOP=ICR1 */
-  TCCR1B = _BV(WGM13) | _BV(WGM12)
-    | _BV(CS10);                  /* prescaler 1 */
-  ICR1 = icr;                         /* TOP counter value (freeing OCR1A*/
-}
-
-/* 16-bit version of analogWrite(). Works only on pins 9 and 10. */
-void analogWrite16(uint8_t pin, uint16_t val)
-{
-  switch (pin) {
-  case  9: OCR1A = val; break;
-  case 10: OCR1B = val; break;
-  }
+void setupI2c() {
+  Wire.begin(I2C_ADDRESS);      // join i2c bus with address #8
+  Wire.onReceive(receiveEvent); // register event
 }
 
 void setup() {
-  Wire.begin(I2C_ADDRESS);                // join i2c bus with address #8
-  Wire.onReceive(receiveEvent); // register event
   Serial.begin(9600);           // start serial for output
   Serial.println("Pro Mini started! on port 12");
+  setupI2c();
   setupPWM16();
   analogWrite16(9, 0xffff);
   analogWrite16(10, 0xffff);
-  //analogWrite(led, 150);
 }
 
 void setLed(int led, uint16_t value) {
