@@ -14,8 +14,10 @@
 ** Upload firmware
    1. Install platformio
 
-   #+BEGIN_SRC bash
-   platformio run -t upload --upload-port /dev/ttyUSB0
-   #+END_SRC
+   2. Run this in esp8266_osc_server and i2c_leds_controller directories to compile and upload to corresponding controller
 
-   Replace /dev/ttyUSB0 with your UART or remove it and --upload-port argument and hope platformio guesses correctly.
+      #+BEGIN_SRC bash
+      platformio run -t upload --upload-port /dev/ttyUSB0
+      #+END_SRC
+
+      Replace /dev/ttyUSB0 with your UART or remove it and --upload-port argument and hope platformio guesses correctly.
