@@ -54,16 +54,3 @@ void led_msg(OSCMessage &msg, int offset) {
 void loop() {
   process_udp_packet(led_msg);
 }
-
-void _loop(){
-  // turn the LED on (HIGH is the voltage level)
-  digitalWrite(LED_BUILTIN, HIGH);
-  change_all_leds(&global_led_state, 30000);
-  // wait for a second
-  delay(1000);
-  // turn the LED off by making the voltage LOW
-  digitalWrite(LED_BUILTIN, LOW);
-  change_all_leds(&global_led_state, 0);
-  // wait for a second
-  delay(1000);
-}
