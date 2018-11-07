@@ -12,27 +12,17 @@ uint8_t set_led_brightness(uint8_t dev_addr, LED_VALUE led_1_value, LED_VALUE le
 
   LED_I2C_MESSAGE msg = { I2C_MAGIC_NUM, led_1_value, led_2_value };
 
-  // Serial.print("size of msg: ");
-  // Serial.println(sizeof(msg), DEC);
-
-  uint8_t bytes_written = Wire.write((uint8_t *) &msg, sizeof(msg));
+  Wire.write((uint8_t *) &msg, sizeof(msg));
   uint8_t result = Wire.endTransmission();
 
-  // Serial.print(bytes_written, DEC);
-  // Serial.print(" bytes written to device ");
-  // Serial.println(dev_addr, HEX);
-
-  if (result == 0) {
-    Serial.print(".");
-    // Serial.print("sent i2c message to device ");
-    // Serial.print(dev_addr, HEX);
-    // Serial.println(" successfully");
-  } else {
-    // Serial.print("error sending i2c message to device ");
-    // Serial.print(dev_addr, HEX);
-    // Serial.print(": ");
-    Serial.print(result, DEC);
+  if (IS_LOGGING_ENABLED) {
+    if (result == 0) {
+      Serial.print(".");
+    } else {
+      Serial.print(result, DEC);
+    }
   }
+
   return result;
 }
 
@@ -42,6 +32,8 @@ void update_led_dev_state(DEV dev, LED_STATE *led_state) {
   } else if (dev == DEV_2) {
     set_led_brightness(dev, led_state->dev_2_led_1, led_state->dev_2_led_2);
   }
+
+  // ignore otherwise, error should be reported by this point
 }
 
 void print_led_state(LED_STATE *led_state) {
@@ -77,6 +69,7 @@ DEV get_led_dev_id(unsigned int led_num) {
   } else {
     print_error("Invalid LED number:");
     Serial.println(led_num, DEC);
+    return 0;
   }
 }
 

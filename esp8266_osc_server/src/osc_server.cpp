@@ -20,7 +20,7 @@ void setup_wifi() {
   Serial.println(WIFI_SSID);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  Serial.print("----");
+  Serial.println("----");
 }
 
 void setup_osc_server() {
@@ -33,8 +33,6 @@ void setup_osc_server() {
 void process_udp_packet(void(*callback)(OSCMessage &, int)) {
   OSCBundle bundle;
   int size = Udp.parsePacket();
-
-  // Serial.println("got udp packet");
 
   if (size > 0) {
     while(size--) {
