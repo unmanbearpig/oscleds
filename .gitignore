@@ -1,2 +1,3 @@
+i2c_leds_controller/.pioenvs
 esp8266_osc_server/.pioenvs
 esp8266_osc_server/src/wifi_network.h
