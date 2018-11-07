@@ -1,0 +1,9 @@
+* Controlling LEDs over WiFi
+
+  Uses ESP8266 that talks to 1 or more Pro Minis over I2c bus that have 2 16 bit resolution PWM pins.
+
+  You can talk to ESP8266 over OSC (Open Sound Control) protocol and tell it to change brightness of LEDs.
+
+
+** Setup
+   SSID and password for WiFi network is defined in "esp8266_osc_server/src/wifi_network.h", use wifi_network_example.h as a reference.
