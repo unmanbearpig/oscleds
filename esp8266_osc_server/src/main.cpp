@@ -46,6 +46,7 @@ void loop() {
 
   if (loop_counter % 50000 == 0) {
     update_logging_mode();
+    check_wifi_status();
   }
 
   process_udp_packet(led_msg);

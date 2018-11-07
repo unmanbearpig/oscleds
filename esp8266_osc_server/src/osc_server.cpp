@@ -23,6 +23,12 @@ void setup_wifi() {
   Serial.println("----");
 }
 
+void check_wifi_status() {
+  if (WiFi.status() != WL_CONNECTED) {
+    setup_wifi();
+  }
+}
+
 void setup_osc_server() {
   setup_wifi();
   Udp.begin(UDP_LOCAL_PORT);
