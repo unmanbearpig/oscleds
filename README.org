@@ -4,6 +4,18 @@
 
   You can talk to ESP8266 over OSC (Open Sound Control) protocol and tell it to change brightness of LEDs.
 
+** Hardware
+   - ESP8266 (I use D1 mini)
+   - Arduino Pro Mini. I have some clones. I use 5V 16Mhz 168 version. It works on 3v3 for me, so no need for i2c power level converters.
 
 ** Setup
    SSID and password for WiFi network is defined in "esp8266_osc_server/src/wifi_network.h", use wifi_network_example.h as a reference.
+
+** Upload firmware
+   1. Install platformio
+
+   #+BEGIN_SRC bash
+   platformio run -t upload --upload-port /dev/ttyUSB0
+   #+END_SRC
+
+   Replace /dev/ttyUSB0 with your UART or remove it and --upload-port argument and hope platformio guesses correctly.
