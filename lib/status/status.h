@@ -4,8 +4,8 @@
 
 extern uint8_t error_led;
 extern uint8_t global_log_status;
+extern const uint8_t logging_pin;
 
-#define LOGGING_PIN D5
 #define LOG_ENABLED LOW
 #define LOG_DISABLED HIGH
 

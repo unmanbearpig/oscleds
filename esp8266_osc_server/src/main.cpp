@@ -6,6 +6,7 @@
 #include "d1_mini.h"
 
 uint8_t error_led = D2;
+const uint8_t logging_pin = D5;
 
 LED_STATE global_led_state = { 0, 0, 0, 0 };
 

@@ -2,7 +2,9 @@
 #include "pwm_16.h"
 #include <Wire.h>
 #include <WireData.h>
+#include <status.h>
 
+const uint8_t logging_pin = 5;
 #define I2C_ADDRESS 12
 int led = LED_BUILTIN;
 char led_value = 0xff;
@@ -37,6 +39,7 @@ void setupI2c() {
 void setup() {
   Serial.begin(9600);           // start serial for output
   Serial.println("Pro Mini started! on port 12");
+  setup_logging();
   setupI2c();
   setupPWM16();
   analogWrite16(9, 0xffff);
@@ -68,14 +71,15 @@ int loop_index = 0;
 void loop() {
   loop_index++;
 
-  // delay(10);
   if (loop_index % 40000 == 0) {
+    update_logging_mode();
+    if (IS_LOGGING_ENABLED) {
+      Serial.print("LED 9: ");
+      Serial.println(currentBrightness.led_9_brightness, HEX);
 
-    Serial.print("LED 9: ");
-    Serial.println(currentBrightness.led_9_brightness, HEX);
-
-    Serial.print("LED 10: ");
-    Serial.println(currentBrightness.led_10_brightness, HEX);
+      Serial.print("LED 10: ");
+      Serial.println(currentBrightness.led_10_brightness, HEX);
+    }
   }
 
   if (loop_index % 100 == 0) {
@@ -83,22 +87,27 @@ void loop() {
   }
 }
 
-
 void receiveEvent(int byteCount) {
   Brightness receivedBrightness;
 
-  // Serial.print("Received ");
-  Serial.print(byteCount);
-  Serial.println(" bytes");
+  if (IS_LOGGING_ENABLED) {
+    // Serial.print("Received ");
+    Serial.print(byteCount);
+    Serial.println(" bytes");
+  }
 
   wireReadData(receivedBrightness);
 
   if (receivedBrightness.cmd == 123) {
-    // Serial.println("got magic number");
-    Serial.print(".");
+    if (IS_LOGGING_ENABLED) {
+      // Serial.println("got magic number");
+      Serial.print(".");
+    }
     memcpy(&newBrightness, &receivedBrightness, sizeof(Brightness));
   } else {
-    // Serial.print("expected magic number but got:");
-    Serial.print(receivedBrightness.cmd, HEX);
+    if (IS_LOGGING_ENABLED) {
+      // Serial.print("expected magic number but got:");
+      Serial.print(receivedBrightness.cmd, HEX);
+    }
   }
 }
