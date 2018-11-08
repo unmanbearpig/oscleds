@@ -2,7 +2,10 @@
 #include "Wire.h"
 #include "i2c_leds.h"
 #include "osc_server.h"
-#include "status.h"
+#include <status.h>
+#include "d1_mini.h"
+
+uint8_t error_led = D2;
 
 LED_STATE global_led_state = { 0, 0, 0, 0 };
 
@@ -15,6 +18,7 @@ void led_msg(OSCMessage &msg, int offset) {
     value = float_value * 65535;
   } else {
     print_error("unknown type");
+    return;
   }
 
   if (msg.fullMatch("/1", offset)) {

@@ -25,6 +25,7 @@ void setup_wifi() {
 
 void check_wifi_status() {
   if (WiFi.status() != WL_CONNECTED) {
+    log_msg("WiFi is not connected. Reconnecting.");
     setup_wifi();
   }
 }
@@ -42,18 +43,23 @@ void process_udp_packet(void(*callback)(OSCMessage &, int)) {
 
   if (size > 0) {
     while(size--) {
-      // Serial.print("+");
+      if (IS_LOGGING_ENABLED) {
+        Serial.print("+");
+      }
+
       bundle.fill(Udp.read());
     }
 
     if (!bundle.hasError()) {
-      // Serial.println("route");
-      // OSCMessage msg = bundle.getOSCMessage(0);
-      // char osc_address[1000];
-      // msg.getAddress(osc_address, 0);
+      if (IS_LOGGING_ENABLED) {
+        Serial.println("route");
+        OSCMessage msg = bundle.getOSCMessage(0);
+        char osc_address[1000];
+        msg.getAddress(osc_address, 0);
 
-      // Serial.print("address: ");
-      // Serial.println(osc_address);
+        Serial.print("address: ");
+        Serial.println(osc_address);
+      }
 
       bundle.route("/led", callback);
     } else {

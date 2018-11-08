@@ -12,3 +12,4 @@ void setup_wifi();
 void setup_osc_server();
 void led_msg(OSCMessage &msg, int offset);
 void process_udp_packet(void(*callback)(OSCMessage &, int));
+void check_wifi_status();

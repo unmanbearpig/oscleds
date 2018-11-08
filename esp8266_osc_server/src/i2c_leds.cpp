@@ -100,11 +100,6 @@ LED_VALUE get_led_value(LED_STATE *led_state, unsigned int led_num) {
 }
 
 void change_single_led_value(LED_STATE *led_state, unsigned int led_num , LED_VALUE value) {
-  // Serial.print("changing value of led ");
-  // Serial.print(led_num);
-  // Serial.print(" to value ");
-  // Serial.println(value);
-
   set_led_value(led_state, led_num, value);
   update_led_dev_state(get_led_dev_id(led_num), led_state);
 }

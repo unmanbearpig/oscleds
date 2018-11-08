@@ -26,8 +26,6 @@
    for now OSC server assumes it has 2 i2c LED controllers connected on hardcoded addresses, it's fine for me for now.
 ** Things to do
 *** TODO Recover from WiFi disconnects
-*** TODO Optional logging over serial
-    I don't want it to spend time printing to serial when I don't need it.
 *** TODO Ability to discover IP address of ESP8266 OSC server
     Possible options:
     - Use an LCD screen to display it.

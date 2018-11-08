@@ -1,10 +1,8 @@
-#include "d1_mini.h"
 #include "Arduino.h"
-
-#define ERROR_LED D2
 
 /* Logging enabled if pin is 0, i.e. by default */
 
+extern uint8_t error_led;
 extern uint8_t global_log_status;
 
 #define LOGGING_PIN D5
@@ -16,3 +14,4 @@ extern uint8_t global_log_status;
 void setup_logging();
 void update_logging_mode();
 void print_error(const char *msg);
+void log_msg(const char *msg);
