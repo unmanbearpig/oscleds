@@ -43,11 +43,12 @@ void process_udp_packet(void(*callback)(OSCMessage &, int)) {
 
   if (size > 0) {
     while(size--) {
-      if (IS_LOGGING_ENABLED) {
-        Serial.print("+");
-      }
+      uint8_t byte = Udp.read();
+      bundle.fill(byte);
 
-      bundle.fill(Udp.read());
+      if (IS_LOGGING_ENABLED) {
+        Serial.print(byte, HEX);
+      }
     }
 
     if (!bundle.hasError()) {
@@ -64,8 +65,11 @@ void process_udp_packet(void(*callback)(OSCMessage &, int)) {
       bundle.route("/led", callback);
     } else {
       uint8_t error = bundle.getError();
-      print_error("OSC bundle error: ");
-      Serial.println(error);
+
+      if (IS_LOGGING_ENABLED) {
+        Serial.print("OSC bundle error: ");
+        Serial.println(error);
+      }
     }
   }
 }

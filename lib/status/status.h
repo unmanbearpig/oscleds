@@ -6,8 +6,8 @@ extern uint8_t error_led;
 extern uint8_t global_log_status;
 extern const uint8_t logging_pin;
 
-#define LOG_ENABLED LOW
-#define LOG_DISABLED HIGH
+#define LOG_ENABLED HIGH
+#define LOG_DISABLED LOW
 
 #define IS_LOGGING_ENABLED (global_log_status == LOG_ENABLED)
 

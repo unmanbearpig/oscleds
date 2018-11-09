@@ -17,8 +17,9 @@ uint8_t set_led_brightness(uint8_t dev_addr, LED_VALUE led_1_value, LED_VALUE le
 
   if (IS_LOGGING_ENABLED) {
     if (result == 0) {
-      Serial.print(".");
+      Serial.print("k");
     } else {
+      Serial.print("E");
       Serial.print(result, DEC);
     }
   }

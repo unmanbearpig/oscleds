@@ -6,8 +6,7 @@
 #include "d1_mini.h"
 
 uint8_t error_led = D2;
-const uint8_t logging_pin = D5;
-
+const uint8_t logging_pin = D7;
 LED_STATE global_led_state = { 0, 0, 0, 0 };
 
 void led_msg(OSCMessage &msg, int offset) {
@@ -44,12 +43,12 @@ void setup() {
   setup_osc_server();
 }
 
-unsigned int loop_counter = 0;
+uint16_t loop_counter = 0;
 
 void loop() {
-  loop_counter++;
+  loop_counter += 1;
 
-  if (loop_counter % 50000 == 0) {
+  if (loop_counter % 500000 == 0) {
     update_logging_mode();
     check_wifi_status();
   }
