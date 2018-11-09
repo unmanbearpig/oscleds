@@ -37,7 +37,7 @@ void setup_osc_server() {
   Serial.println(Udp.localPort());
 }
 
-void process_udp_packet(void(*callback)(OSCMessage &, int)) {
+void process_udp_packet(void(*linear_callback)(OSCMessage &, int), void(*log_callback)(OSCMessage &, int)) {
   OSCBundle bundle;
   int size = Udp.parsePacket();
 
@@ -62,7 +62,8 @@ void process_udp_packet(void(*callback)(OSCMessage &, int)) {
         Serial.println(osc_address);
       }
 
-      bundle.route("/led", callback);
+      bundle.route("/led", linear_callback);
+      bundle.route("/log", log_callback);
     } else {
       uint8_t error = bundle.getError();
 
