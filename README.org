@@ -11,6 +11,8 @@
 ** Setup
    SSID and password for WiFi network is defined in "esp8266_osc_server/src/wifi_network.h", use wifi_network_example.h as a reference.
 
+   Pin 6 on Pro mini defines which address it's going to use, either 8 or 12.
+
 ** Upload firmware
    1. Install platformio
 
@@ -25,7 +27,6 @@
    Routes used are "led/1" through "led/4".
    for now OSC server assumes it has 2 i2c LED controllers connected on hardcoded addresses, it's fine for me for now.
 ** Things to do
-*** TODO Add dithering?
 *** TODO Add easing for more graduate color change on pro mini?
     Rough number of loop cycles between messages from esp8266 = 1400
     lowest is about 400

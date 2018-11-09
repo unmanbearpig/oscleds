@@ -6,7 +6,8 @@
 #include "led.h"
 
 const uint8_t logging_pin = 5;
-#define I2C_ADDRESS 12
+const uint8_t i2c_address_pin = 6;
+
 int led = LED_BUILTIN;
 
 Brightness currentBrightness = {
@@ -23,8 +24,18 @@ Brightness newBrightness = {
 
 void receiveEvent(int byteCount);
 
-void setupI2c() {
-  Wire.begin(I2C_ADDRESS);      // join i2c bus with address #8
+uint8_t getI2cAddress() {
+  pinMode(i2c_address_pin, INPUT_PULLUP);
+
+  if (digitalRead(i2c_address_pin) == HIGH) {
+    return 8;
+  } else {
+    return 12;
+  }
+}
+
+void setupI2c(uint8_t i2c_address) {
+  Wire.begin(i2c_address);      // join i2c bus with address #8
   Wire.onReceive(receiveEvent); // register event
 }
 
@@ -32,7 +43,7 @@ void setup() {
   Serial.begin(9600);           // start serial for output
   Serial.println("Pro Mini started! on port 12");
   setup_logging();
-  setupI2c();
+  setupI2c(getI2cAddress());
   setupPWM16();
   analogWrite16(9, 0xffff);
   analogWrite16(10, 0xffff);
@@ -60,17 +71,12 @@ void loop() {
       print_current_brightness();
     }
   }
-
-  // if (loop_index % 1 == 0) {
-  //   updateLedBrightness(&newBrightness);
-  // }
 }
 
 void receiveEvent(int byteCount) {
   Brightness receivedBrightness;
 
   if (IS_LOGGING_ENABLED) {
-    // Serial.print("Received ");
     Serial.print(byteCount);
     Serial.println(" bytes");
   }
