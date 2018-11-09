@@ -27,16 +27,17 @@
    Routes used are "led/1" through "led/4".
    for now OSC server assumes it has 2 i2c LED controllers connected on hardcoded addresses, it's fine for me for now.
 ** Things to do
+*** TODO Add ability to change LED options on Pro Mini via OSC
+*** TODO Add dithering?
 *** TODO Add easing for more graduate color change on pro mini?
     Rough number of loop cycles between messages from esp8266 = 1400
     lowest is about 400
-
+*** TODO Optionally fade after each message with specified rate
 *** TODO Ability to discover IP address of ESP8266 OSC server
     Possible options:
     - Use an LCD screen to display it.
     - mDNS?
     - Broadcast something on the network?
-*** TODO Minimize latency
 *** TODO Ability to set i2c address on Pro Mini in runtime
     Right now it's hardcoded and I need to reupload firmware to change i2c address, which is inconvenient. It could check state of some pin to determine address it should use
 *** TODO Status LEDs for debugging?
