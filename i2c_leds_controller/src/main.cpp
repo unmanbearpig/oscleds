@@ -88,7 +88,7 @@ void receiveEvent(int byteCount) {
       Serial.print(".");
     }
     memcpy(&newBrightness, &receivedBrightness, sizeof(Brightness));
-     updateLedBrightness(&newBrightness);
+    updateLedBrightness(&newBrightness);
   } else {
     if (IS_LOGGING_ENABLED) {
       Serial.print("expected magic number but got:");
