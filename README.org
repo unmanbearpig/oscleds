@@ -79,6 +79,9 @@ if __name__ == "__main__":
 
     It seems to be also available for Android, just search Google Store
 ** Things to do
+*** TODO Add /all/ route for addressing all LEDs at the same time
+*** TODO Option to limit maximum brightness
+*** TODO Option to reduce brightness by some amount
 *** TODO Add ability to change LED options on Pro Mini via OSC
 *** TODO Add dithering?
 *** TODO Add easing for more graduate color change on pro mini?
