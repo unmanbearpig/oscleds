@@ -45,6 +45,8 @@
    python3 example.py --ip YOUR_IP_ADDRESS --port 8888
    #+END_SRC
 
+   Here is the example.py:
+
    #+BEGIN_SRC python
 """Small example OSC client
 
