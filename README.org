@@ -24,7 +24,13 @@
 
       Replace /dev/ttyUSB0 with your UART or remove it and --upload-port argument and hope platformio guesses correctly.
 ** OSC
-   Routes used are "led/1" through "led/4".
+   Routes used are "led/1" through "led/4" for controlling each led.
+   There is also "log/1" through "log/4" for controlling them in some kind of logarithmic scale.
+
+   Routes accept integers from 0 to 65536 or floats from 0 to 1.
+
+   Default port is 8888 and right now it's hardcoded.
+
    for now OSC server assumes it has 2 i2c LED controllers connected on hardcoded addresses, it's fine for me for now.
 ** Things to do
 *** TODO Add ability to change LED options on Pro Mini via OSC
