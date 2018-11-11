@@ -73,7 +73,14 @@ if __name__ == "__main__":
         client.send_message("/log/1", random.random())
 
    #+END_SRC
+** Software I've tested with it
+*** Ableton Live
+    OSCBuddy is a nice device for max4live, you can [[https://gumroad.com/l/UCvKN][find it here]] for a small donation or for free.
+*** Clean OSC by Anton Heestand
+    by [[https://twitter.com/Heestand][Anton Heestand]]
 
+    iOS: https://itunes.apple.com/fi/app/clean-osc/id1235192209
+    It seems to be also available for Android, just search Google Store
 ** Things to do
 *** TODO Add ability to change LED options on Pro Mini via OSC
 *** TODO Add dithering?
